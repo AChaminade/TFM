@@ -1,0 +1,491 @@
+Sexo;Municipios;Nacionalidad (continentes);Total
+Ambos sexos;001  Alameda;Africa;..
+Ambos sexos;001  Alameda;América;3
+Ambos sexos;001  Alameda;Asia;..
+Ambos sexos;001  Alameda;Europa;6
+Ambos sexos;001  Alameda;Resto;..
+Ambos sexos;002  Alcaucín;Africa;..
+Ambos sexos;002  Alcaucín;América;4
+Ambos sexos;002  Alcaucín;Asia;..
+Ambos sexos;002  Alcaucín;Europa;63
+Ambos sexos;002  Alcaucín;Resto;..
+Ambos sexos;003  Alfarnate;Africa;1
+Ambos sexos;003  Alfarnate;América;..
+Ambos sexos;003  Alfarnate;Asia;..
+Ambos sexos;003  Alfarnate;Europa;1
+Ambos sexos;003  Alfarnate;Resto;..
+Ambos sexos;004  Alfarnatejo;Africa;..
+Ambos sexos;004  Alfarnatejo;América;..
+Ambos sexos;004  Alfarnatejo;Asia;..
+Ambos sexos;004  Alfarnatejo;Europa;..
+Ambos sexos;004  Alfarnatejo;Resto;..
+Ambos sexos;005  Algarrobo;Africa;9
+Ambos sexos;005  Algarrobo;América;2
+Ambos sexos;005  Algarrobo;Asia;3
+Ambos sexos;005  Algarrobo;Europa;98
+Ambos sexos;005  Algarrobo;Resto;..
+Ambos sexos;006  Algatocín;Africa;..
+Ambos sexos;006  Algatocín;América;..
+Ambos sexos;006  Algatocín;Asia;..
+Ambos sexos;006  Algatocín;Europa;9
+Ambos sexos;006  Algatocín;Resto;..
+Ambos sexos;007  Alhaurín de la Torre;Africa;22
+Ambos sexos;007  Alhaurín de la Torre;América;43
+Ambos sexos;007  Alhaurín de la Torre;Asia;7
+Ambos sexos;007  Alhaurín de la Torre;Europa;306
+Ambos sexos;007  Alhaurín de la Torre;Resto;1
+Ambos sexos;008  Alhaurín el Grande;Africa;110
+Ambos sexos;008  Alhaurín el Grande;América;93
+Ambos sexos;008  Alhaurín el Grande;Asia;39
+Ambos sexos;008  Alhaurín el Grande;Europa;1.023
+Ambos sexos;008  Alhaurín el Grande;Resto;8
+Ambos sexos;009  Almáchar;Africa;..
+Ambos sexos;009  Almáchar;América;..
+Ambos sexos;009  Almáchar;Asia;..
+Ambos sexos;009  Almáchar;Europa;..
+Ambos sexos;009  Almáchar;Resto;..
+Ambos sexos;010  Almargen;Africa;1
+Ambos sexos;010  Almargen;América;3
+Ambos sexos;010  Almargen;Asia;..
+Ambos sexos;010  Almargen;Europa;..
+Ambos sexos;010  Almargen;Resto;..
+Ambos sexos;011  Almogía;Africa;..
+Ambos sexos;011  Almogía;América;5
+Ambos sexos;011  Almogía;Asia;..
+Ambos sexos;011  Almogía;Europa;142
+Ambos sexos;011  Almogía;Resto;..
+Ambos sexos;012  Álora;Africa;5
+Ambos sexos;012  Álora;América;5
+Ambos sexos;012  Álora;Asia;1
+Ambos sexos;012  Álora;Europa;68
+Ambos sexos;012  Álora;Resto;..
+Ambos sexos;013  Alozaina;Africa;..
+Ambos sexos;013  Alozaina;América;..
+Ambos sexos;013  Alozaina;Asia;..
+Ambos sexos;013  Alozaina;Europa;3
+Ambos sexos;013  Alozaina;Resto;..
+Ambos sexos;014  Alpandeire;Africa;..
+Ambos sexos;014  Alpandeire;América;..
+Ambos sexos;014  Alpandeire;Asia;..
+Ambos sexos;014  Alpandeire;Europa;..
+Ambos sexos;014  Alpandeire;Resto;..
+Ambos sexos;015  Antequera;Africa;28
+Ambos sexos;015  Antequera;América;29
+Ambos sexos;015  Antequera;Asia;5
+Ambos sexos;015  Antequera;Europa;76
+Ambos sexos;015  Antequera;Resto;1
+Ambos sexos;016  Árchez;Africa;3
+Ambos sexos;016  Árchez;América;..
+Ambos sexos;016  Árchez;Asia;..
+Ambos sexos;016  Árchez;Europa;8
+Ambos sexos;016  Árchez;Resto;..
+Ambos sexos;017  Archidona;Africa;..
+Ambos sexos;017  Archidona;América;..
+Ambos sexos;017  Archidona;Asia;..
+Ambos sexos;017  Archidona;Europa;3
+Ambos sexos;017  Archidona;Resto;..
+Ambos sexos;018  Ardales;Africa;..
+Ambos sexos;018  Ardales;América;..
+Ambos sexos;018  Ardales;Asia;..
+Ambos sexos;018  Ardales;Europa;3
+Ambos sexos;018  Ardales;Resto;..
+Ambos sexos;019  Arenas;Africa;..
+Ambos sexos;019  Arenas;América;..
+Ambos sexos;019  Arenas;Asia;..
+Ambos sexos;019  Arenas;Europa;..
+Ambos sexos;019  Arenas;Resto;..
+Ambos sexos;020  Arriate;Africa;8
+Ambos sexos;020  Arriate;América;1
+Ambos sexos;020  Arriate;Asia;..
+Ambos sexos;020  Arriate;Europa;9
+Ambos sexos;020  Arriate;Resto;..
+Ambos sexos;022  Benadalid;Africa;..
+Ambos sexos;022  Benadalid;América;..
+Ambos sexos;022  Benadalid;Asia;..
+Ambos sexos;022  Benadalid;Europa;2
+Ambos sexos;022  Benadalid;Resto;..
+Ambos sexos;023  Benahavís;Africa;33
+Ambos sexos;023  Benahavís;América;27
+Ambos sexos;023  Benahavís;Asia;16
+Ambos sexos;023  Benahavís;Europa;692
+Ambos sexos;023  Benahavís;Resto;6
+Ambos sexos;024  Benalauría;Africa;..
+Ambos sexos;024  Benalauría;América;..
+Ambos sexos;024  Benalauría;Asia;..
+Ambos sexos;024  Benalauría;Europa;..
+Ambos sexos;024  Benalauría;Resto;..
+Ambos sexos;025  Benalmádena;Africa;260
+Ambos sexos;025  Benalmádena;América;329
+Ambos sexos;025  Benalmádena;Asia;199
+Ambos sexos;025  Benalmádena;Europa;3.703
+Ambos sexos;025  Benalmádena;Resto;5
+Ambos sexos;026  Benamargosa;Africa;..
+Ambos sexos;026  Benamargosa;América;3
+Ambos sexos;026  Benamargosa;Asia;..
+Ambos sexos;026  Benamargosa;Europa;7
+Ambos sexos;026  Benamargosa;Resto;..
+Ambos sexos;027  Benamocarra;Africa;..
+Ambos sexos;027  Benamocarra;América;2
+Ambos sexos;027  Benamocarra;Asia;..
+Ambos sexos;027  Benamocarra;Europa;3
+Ambos sexos;027  Benamocarra;Resto;..
+Ambos sexos;028  Benaoján;Africa;..
+Ambos sexos;028  Benaoján;América;..
+Ambos sexos;028  Benaoján;Asia;..
+Ambos sexos;028  Benaoján;Europa;9
+Ambos sexos;028  Benaoján;Resto;..
+Ambos sexos;029  Benarrabá;Africa;1
+Ambos sexos;029  Benarrabá;América;..
+Ambos sexos;029  Benarrabá;Asia;..
+Ambos sexos;029  Benarrabá;Europa;1
+Ambos sexos;029  Benarrabá;Resto;..
+Ambos sexos;030  Borge (El);Africa;..
+Ambos sexos;030  Borge (El);América;..
+Ambos sexos;030  Borge (El);Asia;..
+Ambos sexos;030  Borge (El);Europa;1
+Ambos sexos;030  Borge (El);Resto;..
+Ambos sexos;031  Burgo (El);Africa;..
+Ambos sexos;031  Burgo (El);América;..
+Ambos sexos;031  Burgo (El);Asia;..
+Ambos sexos;031  Burgo (El);Europa;..
+Ambos sexos;031  Burgo (El);Resto;..
+Ambos sexos;032  Campillos;Africa;6
+Ambos sexos;032  Campillos;América;7
+Ambos sexos;032  Campillos;Asia;..
+Ambos sexos;032  Campillos;Europa;4
+Ambos sexos;032  Campillos;Resto;..
+Ambos sexos;033  Canillas de Aceituno;Africa;2
+Ambos sexos;033  Canillas de Aceituno;América;2
+Ambos sexos;033  Canillas de Aceituno;Asia;..
+Ambos sexos;033  Canillas de Aceituno;Europa;37
+Ambos sexos;033  Canillas de Aceituno;Resto;..
+Ambos sexos;034  Canillas de Albaida;Africa;4
+Ambos sexos;034  Canillas de Albaida;América;2
+Ambos sexos;034  Canillas de Albaida;Asia;..
+Ambos sexos;034  Canillas de Albaida;Europa;74
+Ambos sexos;034  Canillas de Albaida;Resto;..
+Ambos sexos;035  Cañete la Real;Africa;..
+Ambos sexos;035  Cañete la Real;América;..
+Ambos sexos;035  Cañete la Real;Asia;..
+Ambos sexos;035  Cañete la Real;Europa;..
+Ambos sexos;035  Cañete la Real;Resto;..
+Ambos sexos;036  Carratraca;Africa;..
+Ambos sexos;036  Carratraca;América;2
+Ambos sexos;036  Carratraca;Asia;..
+Ambos sexos;036  Carratraca;Europa;3
+Ambos sexos;036  Carratraca;Resto;..
+Ambos sexos;037  Cartajima;Africa;..
+Ambos sexos;037  Cartajima;América;..
+Ambos sexos;037  Cartajima;Asia;..
+Ambos sexos;037  Cartajima;Europa;..
+Ambos sexos;037  Cartajima;Resto;..
+Ambos sexos;038  Cártama;Africa;5
+Ambos sexos;038  Cártama;América;1
+Ambos sexos;038  Cártama;Asia;..
+Ambos sexos;038  Cártama;Europa;51
+Ambos sexos;038  Cártama;Resto;..
+Ambos sexos;039  Casabermeja;Africa;3
+Ambos sexos;039  Casabermeja;América;2
+Ambos sexos;039  Casabermeja;Asia;..
+Ambos sexos;039  Casabermeja;Europa;13
+Ambos sexos;039  Casabermeja;Resto;..
+Ambos sexos;040  Casarabonela;Africa;2
+Ambos sexos;040  Casarabonela;América;3
+Ambos sexos;040  Casarabonela;Asia;..
+Ambos sexos;040  Casarabonela;Europa;18
+Ambos sexos;040  Casarabonela;Resto;..
+Ambos sexos;041  Casares;Africa;7
+Ambos sexos;041  Casares;América;11
+Ambos sexos;041  Casares;Asia;5
+Ambos sexos;041  Casares;Europa;314
+Ambos sexos;041  Casares;Resto;2
+Ambos sexos;042  Coín;Africa;23
+Ambos sexos;042  Coín;América;22
+Ambos sexos;042  Coín;Asia;14
+Ambos sexos;042  Coín;Europa;441
+Ambos sexos;042  Coín;Resto;..
+Ambos sexos;043  Colmenar;Africa;..
+Ambos sexos;043  Colmenar;América;3
+Ambos sexos;043  Colmenar;Asia;3
+Ambos sexos;043  Colmenar;Europa;28
+Ambos sexos;043  Colmenar;Resto;..
+Ambos sexos;044  Comares;Africa;..
+Ambos sexos;044  Comares;América;2
+Ambos sexos;044  Comares;Asia;..
+Ambos sexos;044  Comares;Europa;83
+Ambos sexos;044  Comares;Resto;..
+Ambos sexos;045  Cómpeta;Africa;1
+Ambos sexos;045  Cómpeta;América;4
+Ambos sexos;045  Cómpeta;Asia;2
+Ambos sexos;045  Cómpeta;Europa;458
+Ambos sexos;045  Cómpeta;Resto;2
+Ambos sexos;046  Cortes de la Frontera;Africa;..
+Ambos sexos;046  Cortes de la Frontera;América;..
+Ambos sexos;046  Cortes de la Frontera;Asia;..
+Ambos sexos;046  Cortes de la Frontera;Europa;..
+Ambos sexos;046  Cortes de la Frontera;Resto;..
+Ambos sexos;047  Cuevas Bajas;Africa;..
+Ambos sexos;047  Cuevas Bajas;América;..
+Ambos sexos;047  Cuevas Bajas;Asia;..
+Ambos sexos;047  Cuevas Bajas;Europa;1
+Ambos sexos;047  Cuevas Bajas;Resto;..
+Ambos sexos;048  Cuevas del Becerro;Africa;4
+Ambos sexos;048  Cuevas del Becerro;América;..
+Ambos sexos;048  Cuevas del Becerro;Asia;..
+Ambos sexos;048  Cuevas del Becerro;Europa;..
+Ambos sexos;048  Cuevas del Becerro;Resto;..
+Ambos sexos;049  Cuevas de San Marcos;Africa;3
+Ambos sexos;049  Cuevas de San Marcos;América;..
+Ambos sexos;049  Cuevas de San Marcos;Asia;..
+Ambos sexos;049  Cuevas de San Marcos;Europa;..
+Ambos sexos;049  Cuevas de San Marcos;Resto;..
+Ambos sexos;050  Cútar;Africa;1
+Ambos sexos;050  Cútar;América;..
+Ambos sexos;050  Cútar;Asia;..
+Ambos sexos;050  Cútar;Europa;6
+Ambos sexos;050  Cútar;Resto;..
+Ambos sexos;051  Estepona;Africa;236
+Ambos sexos;051  Estepona;América;344
+Ambos sexos;051  Estepona;Asia;173
+Ambos sexos;051  Estepona;Europa;4.147
+Ambos sexos;051  Estepona;Resto;12
+Ambos sexos;053  Frigiliana;Africa;3
+Ambos sexos;053  Frigiliana;América;14
+Ambos sexos;053  Frigiliana;Asia;3
+Ambos sexos;053  Frigiliana;Europa;154
+Ambos sexos;053  Frigiliana;Resto;1
+Ambos sexos;054  Fuengirola;Africa;616
+Ambos sexos;054  Fuengirola;América;427
+Ambos sexos;054  Fuengirola;Asia;232
+Ambos sexos;054  Fuengirola;Europa;4.146
+Ambos sexos;054  Fuengirola;Resto;7
+Ambos sexos;055  Fuente de Piedra;Africa;..
+Ambos sexos;055  Fuente de Piedra;América;..
+Ambos sexos;055  Fuente de Piedra;Asia;1
+Ambos sexos;055  Fuente de Piedra;Europa;..
+Ambos sexos;055  Fuente de Piedra;Resto;..
+Ambos sexos;056  Gaucín;Africa;1
+Ambos sexos;056  Gaucín;América;5
+Ambos sexos;056  Gaucín;Asia;..
+Ambos sexos;056  Gaucín;Europa;89
+Ambos sexos;056  Gaucín;Resto;..
+Ambos sexos;057  Genalguacil;Africa;1
+Ambos sexos;057  Genalguacil;América;..
+Ambos sexos;057  Genalguacil;Asia;..
+Ambos sexos;057  Genalguacil;Europa;15
+Ambos sexos;057  Genalguacil;Resto;..
+Ambos sexos;058  Guaro;Africa;1
+Ambos sexos;058  Guaro;América;2
+Ambos sexos;058  Guaro;Asia;..
+Ambos sexos;058  Guaro;Europa;33
+Ambos sexos;058  Guaro;Resto;..
+Ambos sexos;059  Humilladero;Africa;..
+Ambos sexos;059  Humilladero;América;..
+Ambos sexos;059  Humilladero;Asia;..
+Ambos sexos;059  Humilladero;Europa;1
+Ambos sexos;059  Humilladero;Resto;..
+Ambos sexos;060  Igualeja;Africa;..
+Ambos sexos;060  Igualeja;América;..
+Ambos sexos;060  Igualeja;Asia;..
+Ambos sexos;060  Igualeja;Europa;..
+Ambos sexos;060  Igualeja;Resto;..
+Ambos sexos;061  Istán;Africa;8
+Ambos sexos;061  Istán;América;1
+Ambos sexos;061  Istán;Asia;2
+Ambos sexos;061  Istán;Europa;63
+Ambos sexos;061  Istán;Resto;..
+Ambos sexos;062  Iznate;Africa;1
+Ambos sexos;062  Iznate;América;2
+Ambos sexos;062  Iznate;Asia;..
+Ambos sexos;062  Iznate;Europa;6
+Ambos sexos;062  Iznate;Resto;..
+Ambos sexos;063  Jimera de Líbar;Africa;..
+Ambos sexos;063  Jimera de Líbar;América;..
+Ambos sexos;063  Jimera de Líbar;Asia;1
+Ambos sexos;063  Jimera de Líbar;Europa;6
+Ambos sexos;063  Jimera de Líbar;Resto;..
+Ambos sexos;064  Jubrique;Africa;1
+Ambos sexos;064  Jubrique;América;..
+Ambos sexos;064  Jubrique;Asia;..
+Ambos sexos;064  Jubrique;Europa;8
+Ambos sexos;064  Jubrique;Resto;..
+Ambos sexos;065  Júzcar;Africa;..
+Ambos sexos;065  Júzcar;América;..
+Ambos sexos;065  Júzcar;Asia;..
+Ambos sexos;065  Júzcar;Europa;..
+Ambos sexos;065  Júzcar;Resto;..
+Ambos sexos;066  Macharaviaya;Africa;..
+Ambos sexos;066  Macharaviaya;América;1
+Ambos sexos;066  Macharaviaya;Asia;..
+Ambos sexos;066  Macharaviaya;Europa;5
+Ambos sexos;066  Macharaviaya;Resto;..
+Ambos sexos;067  Málaga;Africa;1.566
+Ambos sexos;067  Málaga;América;940
+Ambos sexos;067  Málaga;Asia;488
+Ambos sexos;067  Málaga;Europa;2.132
+Ambos sexos;067  Málaga;Resto;14
+Ambos sexos;068  Manilva;Africa;30
+Ambos sexos;068  Manilva;América;16
+Ambos sexos;068  Manilva;Asia;38
+Ambos sexos;068  Manilva;Europa;584
+Ambos sexos;068  Manilva;Resto;..
+Ambos sexos;069  Marbella;Africa;2.267
+Ambos sexos;069  Marbella;América;1.165
+Ambos sexos;069  Marbella;Asia;1.314
+Ambos sexos;069  Marbella;Europa;7.599
+Ambos sexos;069  Marbella;Resto;39
+Ambos sexos;070  Mijas;Africa;332
+Ambos sexos;070  Mijas;América;589
+Ambos sexos;070  Mijas;Asia;320
+Ambos sexos;070  Mijas;Europa;12.091
+Ambos sexos;070  Mijas;Resto;39
+Ambos sexos;071  Moclinejo;Africa;1
+Ambos sexos;071  Moclinejo;América;..
+Ambos sexos;071  Moclinejo;Asia;..
+Ambos sexos;071  Moclinejo;Europa;7
+Ambos sexos;071  Moclinejo;Resto;..
+Ambos sexos;072  Mollina;Africa;6
+Ambos sexos;072  Mollina;América;2
+Ambos sexos;072  Mollina;Asia;..
+Ambos sexos;072  Mollina;Europa;2
+Ambos sexos;072  Mollina;Resto;..
+Ambos sexos;073  Monda;Africa;4
+Ambos sexos;073  Monda;América;2
+Ambos sexos;073  Monda;Asia;..
+Ambos sexos;073  Monda;Europa;21
+Ambos sexos;073  Monda;Resto;..
+Ambos sexos;074  Montejaque;Africa;..
+Ambos sexos;074  Montejaque;América;..
+Ambos sexos;074  Montejaque;Asia;..
+Ambos sexos;074  Montejaque;Europa;5
+Ambos sexos;074  Montejaque;Resto;..
+Ambos sexos;075  Nerja;Africa;69
+Ambos sexos;075  Nerja;América;110
+Ambos sexos;075  Nerja;Asia;29
+Ambos sexos;075  Nerja;Europa;1.560
+Ambos sexos;075  Nerja;Resto;2
+Ambos sexos;076  Ojén;Africa;8
+Ambos sexos;076  Ojén;América;3
+Ambos sexos;076  Ojén;Asia;9
+Ambos sexos;076  Ojén;Europa;43
+Ambos sexos;076  Ojén;Resto;..
+Ambos sexos;077  Parauta;Africa;..
+Ambos sexos;077  Parauta;América;..
+Ambos sexos;077  Parauta;Asia;..
+Ambos sexos;077  Parauta;Europa;..
+Ambos sexos;077  Parauta;Resto;..
+Ambos sexos;079  Periana;Africa;..
+Ambos sexos;079  Periana;América;4
+Ambos sexos;079  Periana;Asia;..
+Ambos sexos;079  Periana;Europa;23
+Ambos sexos;079  Periana;Resto;..
+Ambos sexos;080  Pizarra;Africa;1
+Ambos sexos;080  Pizarra;América;10
+Ambos sexos;080  Pizarra;Asia;..
+Ambos sexos;080  Pizarra;Europa;29
+Ambos sexos;080  Pizarra;Resto;3
+Ambos sexos;081  Pujerra;Africa;..
+Ambos sexos;081  Pujerra;América;..
+Ambos sexos;081  Pujerra;Asia;..
+Ambos sexos;081  Pujerra;Europa;..
+Ambos sexos;081  Pujerra;Resto;..
+Ambos sexos;082  Rincón de la Victoria;Africa;61
+Ambos sexos;082  Rincón de la Victoria;América;81
+Ambos sexos;082  Rincón de la Victoria;Asia;11
+Ambos sexos;082  Rincón de la Victoria;Europa;415
+Ambos sexos;082  Rincón de la Victoria;Resto;1
+Ambos sexos;083  Riogordo;Africa;..
+Ambos sexos;083  Riogordo;América;..
+Ambos sexos;083  Riogordo;Asia;..
+Ambos sexos;083  Riogordo;Europa;16
+Ambos sexos;083  Riogordo;Resto;..
+Ambos sexos;084  Ronda;Africa;45
+Ambos sexos;084  Ronda;América;29
+Ambos sexos;084  Ronda;Asia;14
+Ambos sexos;084  Ronda;Europa;104
+Ambos sexos;084  Ronda;Resto;1
+Ambos sexos;085  Salares;Africa;..
+Ambos sexos;085  Salares;América;..
+Ambos sexos;085  Salares;Asia;..
+Ambos sexos;085  Salares;Europa;4
+Ambos sexos;085  Salares;Resto;..
+Ambos sexos;086  Sayalonga;Africa;..
+Ambos sexos;086  Sayalonga;América;2
+Ambos sexos;086  Sayalonga;Asia;1
+Ambos sexos;086  Sayalonga;Europa;109
+Ambos sexos;086  Sayalonga;Resto;..
+Ambos sexos;087  Sedella;Africa;..
+Ambos sexos;087  Sedella;América;2
+Ambos sexos;087  Sedella;Asia;..
+Ambos sexos;087  Sedella;Europa;24
+Ambos sexos;087  Sedella;Resto;..
+Ambos sexos;088  Sierra de Yeguas;Africa;3
+Ambos sexos;088  Sierra de Yeguas;América;..
+Ambos sexos;088  Sierra de Yeguas;Asia;..
+Ambos sexos;088  Sierra de Yeguas;Europa;1
+Ambos sexos;088  Sierra de Yeguas;Resto;..
+Ambos sexos;089  Teba;Africa;1
+Ambos sexos;089  Teba;América;..
+Ambos sexos;089  Teba;Asia;..
+Ambos sexos;089  Teba;Europa;..
+Ambos sexos;089  Teba;Resto;..
+Ambos sexos;090  Tolox;Africa;..
+Ambos sexos;090  Tolox;América;..
+Ambos sexos;090  Tolox;Asia;..
+Ambos sexos;090  Tolox;Europa;8
+Ambos sexos;090  Tolox;Resto;..
+Ambos sexos;091  Torrox;Africa;42
+Ambos sexos;091  Torrox;América;62
+Ambos sexos;091  Torrox;Asia;5
+Ambos sexos;091  Torrox;Europa;2.810
+Ambos sexos;091  Torrox;Resto;1
+Ambos sexos;092  Totalán;Africa;1
+Ambos sexos;092  Totalán;América;..
+Ambos sexos;092  Totalán;Asia;..
+Ambos sexos;092  Totalán;Europa;5
+Ambos sexos;092  Totalán;Resto;..
+Ambos sexos;093  Valle de Abdalajís;Africa;5
+Ambos sexos;093  Valle de Abdalajís;América;..
+Ambos sexos;093  Valle de Abdalajís;Asia;..
+Ambos sexos;093  Valle de Abdalajís;Europa;1
+Ambos sexos;093  Valle de Abdalajís;Resto;..
+Ambos sexos;094  Vélez-Málaga;Africa;78
+Ambos sexos;094  Vélez-Málaga;América;80
+Ambos sexos;094  Vélez-Málaga;Asia;23
+Ambos sexos;094  Vélez-Málaga;Europa;733
+Ambos sexos;094  Vélez-Málaga;Resto;..
+Ambos sexos;095  Villanueva de Algaidas;Africa;1
+Ambos sexos;095  Villanueva de Algaidas;América;..
+Ambos sexos;095  Villanueva de Algaidas;Asia;..
+Ambos sexos;095  Villanueva de Algaidas;Europa;2
+Ambos sexos;095  Villanueva de Algaidas;Resto;..
+Ambos sexos;096  Villanueva del Rosario;Africa;2
+Ambos sexos;096  Villanueva del Rosario;América;2
+Ambos sexos;096  Villanueva del Rosario;Asia;..
+Ambos sexos;096  Villanueva del Rosario;Europa;1
+Ambos sexos;096  Villanueva del Rosario;Resto;..
+Ambos sexos;097  Villanueva del Trabuco;Africa;..
+Ambos sexos;097  Villanueva del Trabuco;América;..
+Ambos sexos;097  Villanueva del Trabuco;Asia;..
+Ambos sexos;097  Villanueva del Trabuco;Europa;2
+Ambos sexos;097  Villanueva del Trabuco;Resto;..
+Ambos sexos;098  Villanueva de Tapia;Africa;..
+Ambos sexos;098  Villanueva de Tapia;América;..
+Ambos sexos;098  Villanueva de Tapia;Asia;..
+Ambos sexos;098  Villanueva de Tapia;Europa;..
+Ambos sexos;098  Villanueva de Tapia;Resto;..
+Ambos sexos;099  Viñuela;Africa;..
+Ambos sexos;099  Viñuela;América;2
+Ambos sexos;099  Viñuela;Asia;..
+Ambos sexos;099  Viñuela;Europa;21
+Ambos sexos;099  Viñuela;Resto;..
+Ambos sexos;100  Yunquera;Africa;..
+Ambos sexos;100  Yunquera;América;..
+Ambos sexos;100  Yunquera;Asia;1
+Ambos sexos;100  Yunquera;Europa;5
+Ambos sexos;100  Yunquera;Resto;..
+Ambos sexos;901  Torremolinos;Africa;977
+Ambos sexos;901  Torremolinos;América;541
+Ambos sexos;901  Torremolinos;Asia;596
+Ambos sexos;901  Torremolinos;Europa;3.925
+Ambos sexos;901  Torremolinos;Resto;12
