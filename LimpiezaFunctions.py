@@ -95,6 +95,24 @@ def norma2(s):
     
     return s
 
+def Correccion_Mun(df, d, dnorm):
+    
+    '''
+    Función pensada para, dada una lista de municipios por provincia en un formato
+    no deseado ordenados, cambiarlos por el formato correcto. Los valores de entrada
+    son el dataframe o lista, la lista de municipios y la lista de municipios
+    normalizada, y el return es el dataframe o lista modificado.
+    '''
+    
+    for i in range(len(df)):
+        for j in range(len(dnorm)):
+            
+            if norma(df['Municipios'][i]) == dnorm[j]:
+                
+                df.at[i, 'Municipios'] = d[j]
+                
+    return df
+
 #-----------------------------------------------------------------------------#
 
 #Funciones Scrapping#
@@ -255,7 +273,7 @@ def Scrap3(A, B, C, id_tab, url_0):
             
     return df
 
-def Scrap4(cont, id_tabla, url_0):
+def get_renta(cont, id_tabla, url_0):
     
     """
     Función pensada para obtener, vía web scrapping, los datos de renta por
@@ -275,6 +293,31 @@ def Scrap4(cont, id_tabla, url_0):
         
         tbl = soup.find('table', {'id': id_tabla})
         df.append(pd.read_html(str(tbl))[0])
+        
+def get_paro(Anio, num_Anio, mes, num_mes, prov, url_0):
+    
+    df = []
+    
+    for i in range(len(Anio)):
+        for j in range(len(mes)):
+            for k in range(len(prov)):
+                
+                try:
+                
+                    url = url_0+Anio[i]+'/'+mes[j]+'_'+Anio[i]+'/MUNI_'+prov[k]+\
+                        '_'+num_mes[j]+num_Anio[i]+'.xls'
+                    
+                    df.append(pd.read_excel(url, skiprows = range(5)))
+                    
+                except:
+                    
+                    ar_0 = 'Data/Paro/MUNI_'
+                    archivo = ar_0+prov[k]+'_'+num_mes[j]+num_Anio[i]+'.csv'
+                    
+                    df.append(pd.read_csv(archivo, sep = ';', skiprows = range(5),
+                                          encoding = 'ISO-8859-1'))
+                    
+    return df
 
 #-----------------------------------------------------------------------------#
                 
@@ -339,6 +382,69 @@ def Exclud(d,df):
                     
     return df
 
+def Limp_Paro(df, d, prov):
+    
+    '''
+    Función pensada para limpiar los datos de paro del SEPE. El valor de entrada 
+    será la lista de dataframes df, la lista de municipios normalizados d y la lista
+    de provincias, mientras que el return será ese mismo dataframe limpio.
+    '''
+    
+    num_munip = [102, 44, 75, 168, 79, 97, 100, 105]
+    
+    for i in range(len(df)):
+    
+        # Primero se eliminarán las dos primeras filas que carecen de información.
+        
+        df[i] = df[i].drop(range(2)).reset_index(drop = True)
+        
+        #Ahora se escogerán las filas cuya columna de municipios no sea NaN
+        
+        df[i] = df[i][df[i]['Municipios'].notna()]
+        
+        # Se rellenarán los NaN con ceros
+        
+        df[i].fillna(0, inplace = True)
+                
+    #Ahora se eliminarán los municipios que no se encuentran en la lista
+        
+    df = Exclud(d,df)
+    
+    for i in range(len(df)):
+        
+        #Y a continuación se eliminará el exceso de filas de cada dataframe
+        
+        for j in range(len(prov)):
+            
+            if df[i]['Provincia'][0] == prov[j] and len(df[i])-num_munip[j] > 0:
+                
+                df[i].drop(df[i].tail(len(df[i])-num_munip[j]).index, inplace = True)
+                
+    return df
+
+def strtoint(df,a,b):
+    
+    '''
+    Función pensada para convertir a int todos los elementos de las columnas de 
+    un dataframe seleccionado. El valor de entrada es el dataframe y la posición,
+    de las columnas que se quiera modificar, mientras que el return es el mismo 
+    dataframe modificado.
+    '''
+    
+    for i in range(len(df)):
+        for j in range(a,b):
+            
+            if type(df[df.columns[j]][i]) == str:
+                
+                if df[df.columns[j]][i] == ' ':
+                    
+                    df[df.columns[j]][i] = 0
+                    
+                else:
+                    
+                    df[df.columns[j]][i] = int(df[df.columns[j]][i].replace(',',''))
+                    
+    return df
 #-----------------------------------------------------------------------------#
 
 #Funciones de separación#
@@ -449,6 +555,26 @@ def Sep_Muni(df):
                 df[i].loc[df[i]['Municipios'] == j,'Clasificación'] = 5 
         
     return df
+
+def Calculo_porcentual(df1, df2, columnas):
+    
+    '''
+    Función pensada para calcular el porcentaje de parados totales y por sector
+    sobre la población total. Los valores de entrada son los dataframes con datos 
+    de paro y de población, y las columnas que deben cambiarse. El return es el
+    dataframe de Paro modificado.
+    '''
+    
+    for i in range(len(df1)):
+        
+        a = int(df2[(df2['Año'] == df1['Año'][i]) & (df2['Municipios'] == \
+                                                     df1['Municipios'][i])]['Total'])
+        
+        for j in columnas:
+            
+            df1[j][i] = round(df1[j][i]/a*100,2)
+            
+    return df1
 #-----------------------------------------------------------------------------#
 
 #Funciones de visualización#
@@ -537,12 +663,12 @@ def fig2(Anio,Dif):
             legend_title = 'Ventaja de la'
             )
 
-    return go.FigureWidget(data = bars, layout = layout)
+    return go.Figure(data = bars, layout = layout)
 
 def fig3(df):
     
     '''
-    Funcioón pensada para graficar la evolución del peso de cada categoría de
+    Función pensada para graficar la evolución del peso de cada categoría de
     municipios en la población total.
     '''
     
@@ -555,9 +681,75 @@ def fig3(df):
     ])
     fig.update_layout(barmode = 'stack',
                       title_text = 'Evolución de la Población ',
-                      xaxis_title = 'Año censal',
+                      xaxis_title = 'Año',
                       yaxis_title = 'Porcentaje',
                       legend_title = 'Habitantes')
+    
+    return fig
+
+def fig4(df, n, k = 'Población'):
+    
+    '''
+    Función pensada para realizar un gráfico de líneas con la población de las 
+    provincias de Andalucía. Los valores de entrada son el dataframe con los datos,
+    n un vector con las provincias, k el título del eje y. El 
+    return es el gráfico en cuestión.
+    '''
+    
+    fig = go.Figure()
+    
+    for i in n:
+        
+        fig.add_trace(go.Scatter(
+            x = df.index,
+            y = df['Total'][i],
+            mode = 'lines',
+            name = i,
+        ))
+        
+    fig.update_layout(
+        title = {'text': 'Evolución de la Población de las Provincias',
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title = 'Año',
+        yaxis_title = k,
+        legend_title = 'Provincia'
+        )
+    
+    return fig
+
+def fig5(df):
+    
+    '''
+    Esta función tiene la misma función, valga la redundancia, que la función
+    anterior, pero para los municipios, destacando además a que provincia pertenecen.
+    El valor de entrada es el dataframe con la población por municipios, y el return 
+    es la figura.
+    '''
+    
+    fig = go.Figure()
+    
+    for i in df['Municipios'].unique():
+        
+        fig.add_trace(go.Scatter(
+            x = df['Periodo'].unique(),
+            y = df[df['Municipios'] == i]['Total'],
+            mode = 'lines',
+            name = i,
+            ))
+        
+    fig.update_layout(
+        title = {'text': 'Población de los Municipios de más de 100 000 habitantes',
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title = 'Año',
+        yaxis_title = 'Población',
+        legend_title = 'Municipios'
+        )
     
     return fig
 
