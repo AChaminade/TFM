@@ -31,17 +31,33 @@ def norma(s):
         
         s = s[3:]+', El'
         
+    elif s[0:3] == 'EL ':
+        
+        s = s[3:]+', EL'
+        
     elif s[0:3] == 'La ':
         
         s = s[3:]+', La'
+        
+    elif s[0:3] == 'LA ':
+        
+        s = s[3:]+', LA'
     
     elif s[0:4] == 'Los ':
         
         s = s[4:]+', Los'
         
+    elif s[0:4] == 'LOS ':
+        
+        s = s[4:]+', LOS'
+        
     elif s[0:4] == 'Las ':
         
         s = s[4:]+', Las'
+        
+    elif s[0:4] == 'LAS ':
+        
+        s = s[4:]+', LAS'
         
     elif s[-5:] == ' (LA)':
         
@@ -59,16 +75,20 @@ def norma(s):
         
         s = s[:-6]+', Los'
         
+    if 'Ñ' in s:
+        s = s.replace('Ñ','N')
+        
+    elif 'ñ' in s:
+        s = s.replace('ñ','n')
+        
     s = s.upper()
         
     if s == 'VILLA DE OTURA':
-        
         s = 'OTURA'
         
     if s == 'LANTEJUELA, LA':
-        
         s = 'LANTEJUELA'
-    
+        
     return s
 
 def norma2(s):
@@ -210,14 +230,16 @@ def Scrap3(A, B, C, id_tab, url_0):
     Función pensada para obtener vía web scrapping los resultados de las elecciones
     autonómicas en Andalucía por municipio, donde A es el vector con los años de
     las elecciones, B el vector con las provincias, C la lista de municipios, id_tab
-    el id de la tabla y url_0 el inicio de la url de la página.
+    el id de la tabla y url_0 el inicio de la url de la página. El return es una 
+    lista de dataframes con los resultados y una lista de listas con datos de 
     """
     
     df = []
+    Cuenta = []
     
     for i in range(len(A)):
     
-        url_1 = url_0+A[i]
+        url_1 = url_0+A[i]+'/'
         cont = 0
         
         for k in C:
@@ -226,35 +248,35 @@ def Scrap3(A, B, C, id_tab, url_0):
             
             if cont <= 101:
                     
-                url = url_1+B[0]+k
+                url = url_1+B[0]+'/'+k
                     
             elif cont > 101 and cont <= 145:
                     
-                url = url_1+B[1]+k
+                url = url_1+B[1]+'/'+k
                     
             elif cont > 145 and cont <= 220:
                     
-                url = url_1+B[2]+k
+                url = url_1+B[2]+'/'+k
                     
             elif cont > 220 and cont <= 388:
                     
-                url = url_1+B[3]+k
+                url = url_1+B[3]+'/'+k
                     
             elif cont > 388 and cont <= 467:
                     
-                url = url_1+B[4]+k
+                url = url_1+B[4]+'/'+k
                     
             elif cont > 467 and cont <= 564:
                     
-                url = url_1+B[5]+k
+                url = url_1+B[5]+'/'+k
                     
             elif cont > 564 and cont <= 664:
                     
-                url = url_1+B[6]+k
+                url = url_1+B[6]+'/'+k
                     
             elif cont > 664:
                     
-                url = url_1+B[7]+k
+                url = url_1+B[7]+'/'+k
                 
             pagina = requests.get(url)
             soup = BeautifulSoup(pagina.content, 'html.parser')
@@ -263,15 +285,17 @@ def Scrap3(A, B, C, id_tab, url_0):
                 
                 tbl = soup.find('table', {'id': id_tab[i]})
                 df.append(pd.read_html(str(tbl))[0])
+                Cuenta.append([A[i],C[cont]])
                 
             except:
                 
                 tbl = soup.find('table', {'id': 'tb1_12'})
                 df.append(pd.read_html(str(tbl))[0])
+                Cuenta.append([A[i],C[cont]])
                 
             cont += 1
             
-    return df
+    return df, Cuenta
 
 def get_renta(cont, id_tabla, url_0):
     
@@ -293,6 +317,8 @@ def get_renta(cont, id_tabla, url_0):
         
         tbl = soup.find('table', {'id': id_tabla})
         df.append(pd.read_html(str(tbl))[0])
+        
+    return df
         
 def get_paro(Anio, num_Anio, mes, num_mes, prov, url_0):
     
@@ -422,6 +448,54 @@ def Limp_Paro(df, d, prov):
                 
     return df
 
+def Limp_Renta(df, d, dnorm, prov):
+    
+    '''
+    Función pensada para limpiar los datos de Renta. El valor de entrada será la
+    lista de dataframes df, la lista de municipios, la lista de municipios normalizados,
+    y la lista de provincias. El return será esa misma lista con los datos limpios
+    y columnas añadidas de la provincia a la que pertenece cada municipio y año
+    al que pertenecen los datos.
+    '''
+    
+    for i in range(len(df)):
+        c = -1
+        df[i]['Provincia'] = 'Almería'
+        
+        for j in range(len(df[i])):
+            if norma(df[i]['Municipios'][j]) in dnorm:
+                c += 1
+            
+            df[i]['Provincia'][j] = prov[c] #Asignar provincias a los municipios
+            
+        df[i]['Municipios'] = df[i]['Municipios'].str.strip('-0123456789 ')
+            
+        df[i] = df[i][df[i]['Puesto Nacional'].notna()].reset_index(drop = True) 
+        #Eliminar las provincias
+        
+        if i == 5:
+            
+            df[i] = df[i][df[i]['Renta Bruta'] != 'S.E.'].reset_index(drop = True)
+            #Notación única del último año
+            df[i]['Renta Bruta'] = df[i]['Renta Bruta'].str.replace('.','').astype(int)
+            df[i]['Renta Disponible'] = df[i]['Renta Disponible'].str.replace('.','')\
+                                                                .astype(int)
+            df[i]['Puesto Nacional'] = df[i]['Puesto Nacional'].str.replace('.','')\
+                .str.replace('-','0').astype(int)       
+            df[i]['Puesto Autonómico'] = df[i]['Puesto Autonómico'].str.replace('-','0')\
+                .astype(int)      
+            
+            break                                       
+        
+        df[i]['Puesto Nacional'] = df[i]['Puesto Nacional'].str.replace('.','')\
+                .str.replace('-','0').astype(int)
+        df[i]['Puesto Autonómico'] = df[i]['Puesto Autonómico'].str.replace('-','0')\
+                .astype(int)
+        df[i]['Renta Bruta'] = (df[i]['Renta Bruta'])*1000
+        df[i]['Renta Disponible'] = (df[i]['Renta Disponible']*1000).astype(int)
+        
+    return df
+        
 def strtoint(df,a,b):
     
     '''
@@ -435,7 +509,6 @@ def strtoint(df,a,b):
         for j in range(a,b):
             
             if type(df[df.columns[j]][i]) == str:
-                
                 if df[df.columns[j]][i] == ' ':
                     
                     df[df.columns[j]][i] = 0
@@ -477,6 +550,42 @@ def Sep(df, Iz, Der):
         Porcentaje_izquierda.append(round(contador_izquierda,2))
         
     return Porcentaje_izquierda, Porcentaje_derecha
+
+def Sep_municipales(df, Iz, Der, elect):
+    
+    '''
+    Función para calcular el porcentaje de cada bloque ideológico en las 
+    elecciones fenerales a nivel municipal. Los valores de entrada son el dataframe
+    con los resultados electorales, la lista con los partidos de izquierda y derecha
+    y el vector con el año de elección, y el return el mismo dataframe con los 
+    bloques por municipio.
+    '''
+    
+    for i in range(len(df)):
+        
+        Izquierda = []
+        Derecha = []
+        
+        for j in range(len(df[i].columns)):
+            
+            if df[i].columns[j] in Iz.tolist():
+                
+                Izquierda.append(df[i].columns[j])
+                
+            elif df[i].columns[j] in Der.tolist():
+                
+                Derecha.append(df[i].columns[j])
+            
+        df[i]['Resultado Izquierda'] = round(df[i][Izquierda].sum(axis = 1)/\
+                                             df[i]['Votos válidos']*100,2)
+        df[i]['Resultado Derecha'] = round(df[i][Derecha].sum(axis = 1)/\
+                                           df[i]['Votos válidos']*100,2)
+        df[i]['Diferencia'] = round(df[i]['Resultado Izquierda']-\
+                                    df[i]['Resultado Derecha'],2)
+        df[i]['Fecha'] = elect[i]
+
+    return df
+            
 
 def Sep_prov(lim1, lim2, df1, df2):
     
@@ -556,6 +665,10 @@ def Sep_Muni(df):
         
     return df
 
+#-----------------------------------------------------------------------------#
+
+#Funciones de Cálculos varios#
+
 def Calculo_porcentual(df1, df2, columnas):
     
     '''
@@ -572,7 +685,7 @@ def Calculo_porcentual(df1, df2, columnas):
         
         for j in columnas:
             
-            df1[j][i] = round(df1[j][i]/a*100,2)
+            df1[j][i] = df1[j][i]/a*100
             
     return df1
 #-----------------------------------------------------------------------------#
@@ -753,6 +866,160 @@ def fig5(df):
     
     return fig
 
+def fig6(df1, df2 = False, lab = 'Renta Disponible', modo = 'Clasificación', s = 5):
+    
+    '''
+    Función diseñada para crear las figuras con las que explorar los datos de renta.
+    Los valores de entrada son:
+        
+        -df1: Dataframe con los datos de renta.
+        -df2: Dataframe con los datos de población. (Opcional)
+        -lab: Rasgo que va a visualizarse, principalmente Renta Disponible y Puestos.
+        -mode: el modo en el que se va a elegir los municipios a representar, 
+               principalmente mediante la clasificación de municipios según población
+               o según un top de puestos de los municipios.
+        -s: En caso de que se decida realizar un top, el número de municipios, en caso
+            de que se decida clasificación, el nivel.
+        
+    El return será la figura.
+    '''
+    
+    fig = go.Figure()
+    
+    if modo == 'Clasificación':
+        
+        try:
+            for i in df2[df2[modo] == s]['Municipios'].unique():
+                Df = df1[df1['Municipios'] == i]
+                    
+                fig.add_trace(go.Scatter(
+                    x = Df['Año'],
+                    y = Df[lab],
+                    mode = 'lines',
+                    name = i,
+                    ))
+                
+            fig.update_layout(
+            title_text = 'Evolución de {}'.format(lab),
+            xaxis_title = 'Año',
+            yaxis_title = lab,
+            legend_title = 'Municipios'
+            )
+                    
+        except TypeError:
+            print('No ha introducido los datos de población')
+            return 'Falta de datos.'
+        
+    if modo == 'top':
+        A = df1[(df1['Puesto Autonómico'] <= s) & (df1['Puesto Autonómico'] > 0)]
+        for i in A['Municipios'].unique(): 
+            #Elige s municipios
+        
+            fig.add_trace(go.Scatter(
+                x = A[A['Municipios'] == i]['Año'],
+                y = A[A['Municipios'] == i][lab],
+                mode = 'lines+markers',
+                name = i
+                ))
+            
+        fig.update_layout(
+            title_text = 'Evolución del top {}'.format(s),
+            xaxis_title = 'Año',
+            yaxis_title = lab,
+            legend_title = 'Municipios'
+            )
+        
+    if lab == 'Puesto Nacional' or lab == 'Puesto Autonómico':
+        
+        fig['layout']['yaxis']['autorange'] = 'reversed'
+        
+    return fig
+
+def fig7(df, n, k = 'Andalucía'):
+    
+    '''
+    Función pensada para realizar un gráfico de líneas y puntos de la población
+    inmigrante. Los valores de entrada son el dataframe con los valores de inmigración,
+    n un vector con las columnas a representar y k la región representada.
+    '''
+    
+    fig = go.Figure()
+    
+    for i in n:
+        
+        fig.add_trace(go.Scatter(
+            x = df.index,
+            y = df['Total'][i],
+            mode = 'lines+markers',
+            name = i,
+        ))
+        
+    fig.update_layout(
+        title = {'text': 'Evolución de la Población Inmigrante de {}'.format(k),
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title = 'Año',
+        yaxis_title = 'Población Inmigrante',
+        )
+    
+    fig.update_xaxes(tickangle = 90)
+    
+    return fig
+
+def fig8(df,n):
+    
+    '''
+    Función pensada para graficar la evolución de la delincuencia por provincias.
+    Los valores de entrada son el dataframe con los datos y un vector con las 
+    provincias. El return es la figura.
+    '''
+    
+    fig = go.Figure()
+    
+    for i in n:
+        fig.add_trace(go.Bar(
+            x = df['Año'].unique(),
+            y = df[df['Provincia'] == i]['Total'],
+            name = i
+            ))
+        
+    fig.update_layout(
+        barmode = 'stack',
+        title = 'Evolución de la delincuencia {}'.format(df['Nacionalidad'].unique()),
+        xaxis_title = 'Año',
+        yaxis_title = 'Número de condenados'
+        )
+    
+    return fig
+
+def fig9(df):
+    
+    '''
+    Función para representar los datos de educación. El valor de entrada es el 
+    dataframe con los datos de educación. El return es la figura.
+    '''
+    
+    fig = go.Figure()
+    
+    for i in df['Formación'].unique():
+        
+        fig.add_trace(go.Bar(
+            x = df['Año'].unique(),
+            y = df[df['Formación'] == i]['Total'],
+            name = i
+            ))
+        
+    fig.update_layout(
+        barmode = 'stack',
+        title = 'Evolución del Nivel de Estudios en Andalucía',
+        xaxis_title = 'Año',
+        yaxis_title = 'Porcentaje'
+        )
+    fig['layout']['xaxis']['autorange'] = 'reversed'
+    
+    return fig
 #-----------------------------------------------------------------------------#
 
 #Funciones de agrupación#

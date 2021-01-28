@@ -37,6 +37,5 @@ mp <- tm_shape(mapadata[mapadata$Winner == 'Derecha',]) +
   tm_layout(legend.outside = TRUE)+
   tm_borders()
 
-
 animation_tmap(mp, filename="Mapas/Mapa_provincias.gif", width = 1600, height = 1300, 
                dpi = 350, delay=100)
