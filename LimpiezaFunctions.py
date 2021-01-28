@@ -555,7 +555,7 @@ def Sep_municipales(df, Iz, Der, elect):
     
     '''
     Función para calcular el porcentaje de cada bloque ideológico en las 
-    elecciones fenerales a nivel municipal. Los valores de entrada son el dataframe
+    elecciones generales a nivel municipal. Los valores de entrada son el dataframe
     con los resultados electorales, la lista con los partidos de izquierda y derecha
     y el vector con el año de elección, y el return el mismo dataframe con los 
     bloques por municipio.
