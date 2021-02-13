@@ -23,6 +23,16 @@ import plotly.graph_objects as go
 
 def norma(s):
     
+    '''
+    Función destinada a normalizar los nombres de los municipios.
+    
+        Parámetros:
+            s (str): Nombre de Municipio.
+            
+        Return:
+            s (str): Nombre de Municipio normalizado.
+    '''
+    
     trans_tab = dict.fromkeys(map(ord, u'\u0301\u0308'), None)
     s = normalize('NFKC', normalize('NFKD', s).translate(trans_tab))
     s = s.rstrip(' ')
@@ -118,10 +128,15 @@ def norma2(s):
 def Correccion_Mun(df, d, dnorm):
     
     '''
-    Función pensada para, dada una lista de municipios por provincia en un formato
-    no deseado ordenados, cambiarlos por el formato correcto. Los valores de entrada
-    son el dataframe o lista, la lista de municipios y la lista de municipios
-    normalizada, y el return es el dataframe o lista modificado.
+    Función para, dado un municipio en formato incorrecto, corregirlo.
+    
+        Parámetros:
+            df (pandas.DataFrame): Lista de Dataframes con los municipios.
+            d (str): Lista con los municipios en formato correcto.
+            d_norm (str): Lista con los municipios en formato normalizado.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes con los nombres corregidos.
     '''
     
     for i in range(len(df)):
@@ -144,9 +159,17 @@ def Scrap1(A,B,id_tabla,url_0):
     
     """
     Función pensada para hacer webscrapping a la página web datoselecciones.com
-    para las elecciones autonómicas por provincia. A es para el año electoral,
-    B para la región, id_tabla el id de la tabla a conseguir, url_0 el comienzo 
-    de la url de la página.
+    para las elecciones autonómicas por provincia. 
+    
+        Parámetros:
+            A (str): Lista de Años en los que ha habido elecciones.
+            B (str): Lista de Provincias.
+            id_tabla (str): Lista de id de las tablas con los resultados en la web.
+            url_0 (str): Sección inicial de la url de la web.
+            
+        Return:
+            df (pandas.DataFrame): Lista de dataframes con los resultados por provincia
+                                   y elección.
     """
     
     df = []
@@ -180,10 +203,18 @@ def Scrap1(A,B,id_tabla,url_0):
 def Scrap2(A,B,id_tab,url_0):
     
     """
-    Función pensada para obtener por web scrapping los resultados de las elecciones
-    generales por provincias, donde A es el vector con el año de cada elección,
-    B es el vector con las provincias, id_tab el id de la tabla a conseguir, y
-    url_0 el comienzo de la url objetivo.
+    Función para obtener mediante scrapping los resultados de las elecciones generales
+    por provincia.
+    
+        Parámetros:
+            A (str): Lista de años en los que hay elección.
+            B (str): Lista de Provincias.
+            id_tab (str): Lista de id de las tablas con los resultados.
+            url_0 (str): Sección inicial de la url de la web.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes con los resultados electorales
+                                   por año y provincia.
     """
     
     df = []
@@ -206,6 +237,16 @@ def Scrap2(A,B,id_tab,url_0):
 
 def Scrap_elpais(id_tabla):
     
+    '''
+    Función para conseguir datos concretos de 2019 de la web de El País.
+    
+        Parámetros:
+            id_tabla (str): Lista con los id de las tablas requeridas.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes con los resultados.
+    '''
+    
     df = []
     
     id_pais = ['04.html','11.html','14.html','18.html','21.html','23.html',
@@ -227,11 +268,18 @@ def Scrap_elpais(id_tabla):
 def Scrap3(A, B, C, id_tab, url_0):
     
     """
-    Función pensada para obtener vía web scrapping los resultados de las elecciones
-    autonómicas en Andalucía por municipio, donde A es el vector con los años de
-    las elecciones, B el vector con las provincias, C la lista de municipios, id_tab
-    el id de la tabla y url_0 el inicio de la url de la página. El return es una 
-    lista de dataframes con los resultados y una lista de listas con datos de 
+    Función para obtener por scrapping los resultados electorales por Municipio.
+    
+        Parámetros:
+            A (str): Lista con los años donde hay elecciones.
+            B (str): Lista con las Provincias.
+            C (str): Lista con los municipios.
+            id_tab (str): Lista con los id de las tablas a conseguir.
+            url_0 (str): Sección inicial de la url de la web.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes con los resultados por municipio.
+            Cuenta (str): Tupla de tuplas con el año de la elección y el municipio.
     """
     
     df = []
@@ -300,10 +348,15 @@ def Scrap3(A, B, C, id_tab, url_0):
 def get_renta(cont, id_tabla, url_0):
     
     """
-    Función pensada para obtener, vía web scrapping, los datos de renta por
-    municipio de la AEAT, donde url_0 es la parte de la url igual para todos 
-    los años, id_tabla es el id único para la tabla que pretende conseguirse,
-    y cont es la parte de la url específica para cada año.
+    Función para obtener los datos de renta por municipio de la AEAT.
+    
+        Parámetros:
+            cont (str): Lista con las secciones de la url diferenciadas para cada año.
+            id_tabla (str): Id de la tabla.
+            url_0 (str): Sección de la url igual para todos los años.
+        
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes con la renta por municipio y año.
     """
     
     df = []
@@ -321,6 +374,21 @@ def get_renta(cont, id_tabla, url_0):
     return df
         
 def get_paro(Anio, num_Anio, mes, num_mes, prov, url_0):
+    
+    '''
+    Función para obtener los datos de paro por scrapping de la web del SEPE.
+    
+        Parámetros:
+            Anio (str): Lista con los años deseados.
+            num_Anio (str): Lista con los dos últimos dígitos de cada año.
+            mes (str): Lista con los meses deseados.
+            num_mes (str): Lista con el mes numérico.
+            prov (str): Lista de las provincias.
+            url_0 (str): Sección inicial de la url, igual para todos los años.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes por mes y provincia.
+    '''
     
     df = []
     
@@ -353,6 +421,12 @@ def ptoint(df):
     
     """
     Función para convertir los porcentajes de los resultados en números decimales
+    
+        Parámetros:
+            df (pandas.DataFrame): Lista de Dataframes que cambiar.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes modificados.
     """
     
     for i in range(len(df)):
@@ -366,8 +440,13 @@ def ptoint(df):
 def Particip(df):
     
     """
-    Función para calcular la participación a partir de las tablas de información
-    general de las elecciones
+    Función para calcular la participación.
+    
+        Parámetros:
+            df (pandas.DataFrame): Lista de Dataframes con la información básica.
+            
+        Return:
+            Part (float): Lista con cifras de participación por elección.
     """
     
     Part = []
@@ -391,10 +470,14 @@ def Particip(df):
 def Exclud(d,df):
     
     '''
-    Función pensada para exluir de los dataframes de población aquellos municipios
-    no incluídos en la lista de Municipios a escuchar. Las entradas son la lista
-    de municipios y los dataframes de población. El return es la lista de dataframes
-    sin los municipios sobrantes.
+    Función para excluir del Dataframe todos aquellos municipios no contemplados.
+    
+        Parámetros:
+            d (str): Lista de municipios.
+            df (pandas.DataFrame): Dataframe con los datos.
+            
+        Return:
+            df (pandas.DataFrame): Dataframe sin los municipios excluídos de la lista.
     '''
     
     for i in range(len(df)):
@@ -411,9 +494,15 @@ def Exclud(d,df):
 def Limp_Paro(df, d, prov):
     
     '''
-    Función pensada para limpiar los datos de paro del SEPE. El valor de entrada 
-    será la lista de dataframes df, la lista de municipios normalizados d y la lista
-    de provincias, mientras que el return será ese mismo dataframe limpio.
+    Función pensada para limpiar los datos de paro.
+    
+        Parámetros:
+            df (pandas.DataFrame): Lista de dataframes con datos de paro.
+            d (str): Lista de municipios normalizados.
+            prov (str): Lista de Provincias.
+            
+        Return:
+            df (pandas.DataFrame): Dataframe limpio.
     '''
     
     num_munip = [102, 44, 75, 168, 79, 97, 100, 105]
@@ -451,11 +540,16 @@ def Limp_Paro(df, d, prov):
 def Limp_Renta(df, d, dnorm, prov):
     
     '''
-    Función pensada para limpiar los datos de Renta. El valor de entrada será la
-    lista de dataframes df, la lista de municipios, la lista de municipios normalizados,
-    y la lista de provincias. El return será esa misma lista con los datos limpios
-    y columnas añadidas de la provincia a la que pertenece cada municipio y año
-    al que pertenecen los datos.
+    Función pensada para limpiar los datos de Renta. 
+    
+        Parámetros:
+            df (pandas.DataFrame): Lista de Dataframes con los datos de renta.
+            d (str): Lista de municipios.
+            d_norm (str): Lista de municipios normalizados.
+            prov (str): Lista de provincias.
+            
+        Return:
+            df (pandas.DataFrame): Lista de Dataframes limpia.
     '''
     
     for i in range(len(df)):
@@ -499,10 +593,15 @@ def Limp_Renta(df, d, dnorm, prov):
 def strtoint(df,a,b):
     
     '''
-    Función pensada para convertir a int todos los elementos de las columnas de 
-    un dataframe seleccionado. El valor de entrada es el dataframe y la posición,
-    de las columnas que se quiera modificar, mientras que el return es el mismo 
-    dataframe modificado.
+    Función para convertir a int todos aquellos elementos de una columna que no lo sean.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe sobre el que va a actuarse.
+            a, b (int): valores entre los cuales está la posición de las columnas
+                        sobre las que se actús.
+                        
+        Return:
+            df (pandas.DataFrame): Dataframe de entrada modificado.
     '''
     
     for i in range(len(df)):
@@ -525,8 +624,19 @@ def strtoint(df,a,b):
 def Sep(df, Iz, Der):
     
     """
-    Esta función sirve para unir los porcentajes de todos los partidos adscritos
-    a cada bloque y separar ambos en dos vectores distintos.
+    Función para unir porcentajes de todos los partidos adscritos a cada bloque,
+    separando en dos vectores el porcentaje total de cada bloque.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            Iz (str): Lista de Partidos de izquierda.
+            Der (str): Lista de Partidos de Derecha.
+            
+        Return:
+            Porcentaje_izquierda (float): Vector con porcentaje total de voto a
+                izquierda por unidad administrativa.
+            Porcentaje_derecha (float): Vector con porcentaje total de voto a 
+                derecha por unidad administrativa.
     """
 
     Porcentaje_derecha = []
@@ -554,11 +664,18 @@ def Sep(df, Iz, Der):
 def Sep_municipales(df, Iz, Der, elect):
     
     '''
-    Función para calcular el porcentaje de cada bloque ideológico en las 
-    elecciones generales a nivel municipal. Los valores de entrada son el dataframe
-    con los resultados electorales, la lista con los partidos de izquierda y derecha
-    y el vector con el año de elección, y el return el mismo dataframe con los 
-    bloques por municipio.
+    Función para calcular el porcentaje de cada bloque ideológico en generales a 
+    nivel municipal.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            Iz (str): Lista de Partidos de Izquierda.
+            Der (str): Lista de Partidos de Derecha.
+            elect (str): Lista con la fecha de las elecciones.
+            
+        Return:
+            df (pandas.DataFrame): Dataframe de entrada con las columnas 
+                'Resultado Izquierda', 'Resultado Derecha' y 'Diferencia' adheridas.
     '''
     
     for i in range(len(df)):
@@ -569,11 +686,9 @@ def Sep_municipales(df, Iz, Der, elect):
         for j in range(len(df[i].columns)):
             
             if df[i].columns[j] in Iz.tolist():
-                
                 Izquierda.append(df[i].columns[j])
                 
             elif df[i].columns[j] in Der.tolist():
-                
                 Derecha.append(df[i].columns[j])
             
         df[i]['Resultado Izquierda'] = round(df[i][Izquierda].sum(axis = 1)/\
@@ -590,11 +705,20 @@ def Sep_municipales(df, Iz, Der, elect):
 def Sep_prov(lim1, lim2, df1, df2):
     
     """
-    Esta función sirve para crear un dataframe con los resultados por bloque 
-    ideológico y provincia, diferencia entre ambos y ganador. Donde lim1 
-    corresponde al primer parámetro en que se basará el dataframe, en este caso
-    el año electoral, lim2 en el segundo, en este caso las provincias, y df1 y
-    df2 son los vectores con los resultados de cada bloque.
+    Función para crear dos dataframe con los resultados por bloque ideológico y 
+    provincia.
+    
+        Parámetros:
+            lim1 (str): Lista con los años de la elección.
+            lim2 (str): Lista con las provincias.
+            df1 (float): Lista con resultados de la Izquierda.
+            df2 (float): Lista con resultados de la Derecha.
+            
+        Return:
+            Izq (pandas.DataFrame): Dataframe con los resultados de la Izquierda por
+                provincia
+            Der (pandas.DataFrame): Dataframe con los resultados de la Derecha por
+                provincia.
     """
     
     I = np.zeros((len(lim1),len(lim2)))
@@ -624,10 +748,14 @@ def Sep_prov(lim1, lim2, df1, df2):
 def Sep_Muni(df):
     
     '''
-    Función pensada para separar los municipios en categorías en función de 
-    la población que tenían en el año 1998. El valor de entrada es el dataframe
-    con la población y el return devuelve un daataframe con una calificación 
-    numérica de 1 a 5 según el tamaño de la población.
+    Función para separar los municipios en categorías según su población en 2005.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            
+        Return:
+            df (pandas.DataFrame): Dataframe de entrada con una columna con las 
+                clasificaciones.
     '''
     
     a = []; b = []; c = []; d = []
@@ -648,19 +776,15 @@ def Sep_Muni(df):
         for j in df[i]['Municipios'].unique().tolist():
             
             if j in a[i]:
-                
                 df[i].loc[df[i]['Municipios'] == j,'Clasificación'] = 2
                 
             elif j in b[i]:
-                
                 df[i].loc[df[i]['Municipios'] == j,'Clasificación'] = 3
                 
             elif j in c[i]:
-                
                 df[i].loc[df[i]['Municipios'] == j,'Clasificación'] = 4
                 
             elif j in d[i]:
-                
                 df[i].loc[df[i]['Municipios'] == j,'Clasificación'] = 5 
         
     return df
@@ -672,19 +796,23 @@ def Sep_Muni(df):
 def Calculo_porcentual(df1, df2, columnas):
     
     '''
-    Función pensada para calcular el porcentaje de parados totales y por sector
-    sobre la población total. Los valores de entrada son los dataframes con datos 
-    de paro y de población, y las columnas que deben cambiarse. El return es el
-    dataframe de Paro modificado.
+    Función para calcular el porcentaje de parados totales y por sector sobre el
+    total de la población.
+    
+        Parámetros:
+            df1 (pandas.DataFrame): Dataframe con datos de Paro.
+            df2 (pandas.DataFrame): Dataframe con datos de Población.
+            Columnas (str): Columnas a cambiar.
+            
+        Return:
+            df1 (pandas.DataFrame): Dataframe de entrada con los valores modificados.
     '''
     
     for i in range(len(df1)):
-        
         a = int(df2[(df2['Año'] == df1['Año'][i]) & (df2['Municipios'] == \
                                                      df1['Municipios'][i])]['Total'])
         
         for j in columnas:
-            
             df1[j][i] = df1[j][i]/a*100
             
     return df1
@@ -695,10 +823,17 @@ def Calculo_porcentual(df1, df2, columnas):
 def fig1(x, y1, y2, y3):
     
     """
-    Función pensada para dibujar un gráfico que incluya barras para representar
-    los resultados de los bloques y lineas y puntos para representar la participación.
-    donde el parámetro x corresponde al año electoral, y1 al resultado de la
-    izquierda, y2 al de la derecha e y3 al de la participación.
+    Función para dibujar un gráfico que represente con barras los resultados de 
+    los bloques, y de lineas y puntos para representar la participación.
+    
+        Parámetros:
+            x (str): Lista con los años de las elecciones.
+            y1 (float): Lista con los resultados de la izquierda.
+            y2 (float): Lista con los resultados de la derecha.
+            y3 (float): Lista con los datos de participación.
+            
+        Return:
+            fig (Figure): Gráfico.
     """
     
     fig = go.Figure(data=[
@@ -731,9 +866,14 @@ def fig1(x, y1, y2, y3):
 def fig2(Anio,Dif):
     
     """
-    Función pensada para representar mediante un gráfico de barras la diferencia
-    entre bloques ideológicos para elecciones, donde Anio es el año electoral
-    y Dif es el vector con el valor de la diferencia.
+    Función para representar mediante gráfico de barras la diferencia entre bloques.
+    
+        Parámetros:
+            Anio (str o int): Lista con los años de las elecciones.
+            Dif (float): Lista con los datos de diferencia entre bloques.
+            
+        Return:
+            Fig (Figure): Gráfico.
     """
     
     bar_heigh = Dif
@@ -781,8 +921,14 @@ def fig2(Anio,Dif):
 def fig3(df):
     
     '''
-    Función pensada para graficar la evolución del peso de cada categoría de
-    municipios en la población total.
+    Función para graficar la evolución del peso de cada categoría de municipios 
+    en la población total.
+    
+        Parámetros:
+            df (pandas.DataFrame): DataFrame con los datos.
+            
+        Return:
+            fig (Figure): Gráfico.
     '''
     
     fig = go.Figure(data = [
@@ -803,10 +949,16 @@ def fig3(df):
 def fig4(df, n, k = 'Población'):
     
     '''
-    Función pensada para realizar un gráfico de líneas con la población de las 
-    provincias de Andalucía. Los valores de entrada son el dataframe con los datos,
-    n un vector con las provincias, k el título del eje y. El 
-    return es el gráfico en cuestión.
+    Función para realizar un gráfico de líneas con la población de las provincias
+    de Andalucía.
+
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos de población.
+            n (str): Lista con las provincias.
+            k (str): Título del eje y.
+            
+        Return:
+            fig (Figure): Gráfico.
     '''
     
     fig = go.Figure()
@@ -836,10 +988,14 @@ def fig4(df, n, k = 'Población'):
 def fig5(df):
     
     '''
-    Esta función tiene la misma función, valga la redundancia, que la función
-    anterior, pero para los municipios, destacando además a que provincia pertenecen.
-    El valor de entrada es el dataframe con la población por municipios, y el return 
-    es la figura.
+    Función para realizar un gráfico de líneas con la población de los municipios
+    de Andalucía con clasificación de más de 100 000 habitantes.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            
+        Return:
+            fig (Figure): Gráfico.
     '''
     
     fig = go.Figure()
@@ -869,19 +1025,21 @@ def fig5(df):
 def fig6(df1, df2 = False, lab = 'Renta Disponible', modo = 'Clasificación', s = 5):
     
     '''
-    Función diseñada para crear las figuras con las que explorar los datos de renta.
-    Los valores de entrada son:
+    Función para crear las figuras con las que explorar los datos de renta.
         
-        -df1: Dataframe con los datos de renta.
-        -df2: Dataframe con los datos de población. (Opcional)
-        -lab: Rasgo que va a visualizarse, principalmente Renta Disponible y Puestos.
-        -mode: el modo en el que se va a elegir los municipios a representar, 
-               principalmente mediante la clasificación de municipios según población
-               o según un top de puestos de los municipios.
-        -s: En caso de que se decida realizar un top, el número de municipios, en caso
-            de que se decida clasificación, el nivel.
+        Parámetros:
+            df1 (pandas.DataFrame): Dataframe con los datos de renta.
+            df2 (pandas.dataFrame): Dataframe con los datos de población. (Opcional)
+            lab (str): Rasgo que va a visualizarse, principalmente Renta Disponible 
+                y Puestos.
+            mode (str): el modo en el que se va a elegir los municipios a representar, 
+                principalmente mediante la clasificación de municipios según población
+                o según un top de puestos de los municipios.
+            s (int): En caso de que se decida realizar un top, el número de municipios, en caso
+                de que se decida clasificación, el nivel.
         
-    El return será la figura.
+        Return:
+            fig (figure): Gráfico
     '''
     
     fig = go.Figure()
@@ -939,8 +1097,15 @@ def fig7(df, n, k = 'Andalucía'):
     
     '''
     Función pensada para realizar un gráfico de líneas y puntos de la población
-    inmigrante. Los valores de entrada son el dataframe con los valores de inmigración,
-    n un vector con las columnas a representar y k la región representada.
+    inmigrante.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            n (str): Lista con las columnas a representar.
+            k (str): Región representada.
+            
+        Return:
+            fig (Figure): Gráfico.
     '''
     
     fig = go.Figure()
@@ -972,8 +1137,13 @@ def fig8(df,n):
     
     '''
     Función pensada para graficar la evolución de la delincuencia por provincias.
-    Los valores de entrada son el dataframe con los datos y un vector con las 
-    provincias. El return es la figura.
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            n (str): Lista de las provincias.
+            
+        Return:
+            fig (Figure): Gráfico.
     '''
     
     fig = go.Figure()
@@ -997,8 +1167,13 @@ def fig8(df,n):
 def fig9(df):
     
     '''
-    Función para representar los datos de educación. El valor de entrada es el 
-    dataframe con los datos de educación. El return es la figura.
+    Función para representar los datos de educación. 
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con los datos.
+            
+        Return:
+            fid (Figure): Gráfico.
     '''
     
     fig = go.Figure()
@@ -1027,9 +1202,15 @@ def fig9(df):
 def Agrup(df):
     
     '''
-    Función pensada para reagrupar el dataframe de municipios por población en 
-    otro por año y categoría. El valor de entrada es el dataframe de Población
-    y el return el dataframe de porcentaje de población por año y categoría.
+    Función para reagrupar el dataframe de municipios por población en otro por año 
+    y categoría. 
+    
+        Parámetros:
+            df (pandas.DataFrame): Dataframe con datos de población.
+            
+        Return:
+            P (pandas.DataFrame): Dataframe con porcentajes de población por año y
+                categoría.
     '''
     
     P = []
