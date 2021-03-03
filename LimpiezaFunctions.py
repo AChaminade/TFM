@@ -38,51 +38,39 @@ def norma(s):
     s = s.rstrip(' ')
     
     if s[0:3] == 'El ':
-        
         s = s[3:]+', El'
         
     elif s[0:3] == 'EL ':
-        
         s = s[3:]+', EL'
         
     elif s[0:3] == 'La ':
-        
         s = s[3:]+', La'
         
     elif s[0:3] == 'LA ':
-        
         s = s[3:]+', LA'
     
     elif s[0:4] == 'Los ':
-        
         s = s[4:]+', Los'
         
     elif s[0:4] == 'LOS ':
-        
         s = s[4:]+', LOS'
         
     elif s[0:4] == 'Las ':
-        
         s = s[4:]+', Las'
         
     elif s[0:4] == 'LAS ':
-        
         s = s[4:]+', LAS'
         
     elif s[-5:] == ' (LA)':
-        
         s = s[:-5]+', La'
         
     elif s[-5:] == ' (EL)':
-        
         s = s[:-5]+', El'
         
     elif s[-6:] == ' (LAS)':
-        
         s = s[:-6]+', Las'
         
     elif s[-6:] == ' (LOS)':
-        
         s = s[:-6]+', Los'
         
     if 'Ñ' in s:
@@ -104,21 +92,17 @@ def norma(s):
 def norma2(s):
     
     if s == 'Villa de Otura':
-        
         s = 'Otura'
     
     rep = (('á','a'),('é','e'),('í','i'),('ó','o'),('ú','u'),('ñ','n'),
            ('ä','a'),('ë','e'),('ï','i'),('ö','o'),('ü','u'))
     for a,b in rep:
-                
         s = s.replace(a,b).replace(a.upper(),b.upper())
         
     res = ['La', 'El', 'Las','Los']
     
     for c in res:
-        
         if c+' ' in s:
-            
             s = s[len(c)+1:]+' '+c
             
     s = s.replace(' ','-').lower()
@@ -143,7 +127,6 @@ def Correccion_Mun(df, d, dnorm):
         for j in range(len(dnorm)):
             
             if norma(df['Municipios'][i]) == dnorm[j]:
-                
                 df.at[i, 'Municipios'] = d[j]
                 
     return df
@@ -175,11 +158,9 @@ def Scrap1(A,B,id_tabla,url_0):
     df = []
     
     for i in range(len(A)):
-        
         url_1 = url_0+A[i]+'/'
 
         for j in range(len(B)):
-            
             url = url_1+B[j]
                 
             pagina = requests.get(url)
@@ -220,11 +201,9 @@ def Scrap2(A,B,id_tab,url_0):
     df = []
     
     for i in range(len(A)):
-        
         url_1 = url_0+A[i]+'/andalucia/'
         
         for j in range(len(B)):
-            
             url = url_1+B[j]
             
             pagina = requests.get(url)
@@ -254,7 +233,6 @@ def Scrap_elpais(id_tabla):
     nueva_url = 'https://resultados.elpais.com/elecciones/2019-28A/generales/congreso/01/'
      
     for i in range(len(id_pais)):
-                
         Url = nueva_url+id_pais[i]
             
         pagina = requests.get(Url)
@@ -286,44 +264,34 @@ def Scrap3(A, B, C, id_tab, url_0):
     Cuenta = []
     
     for i in range(len(A)):
-    
         url_1 = url_0+A[i]+'/'
         cont = 0
         
         for k in C:
-            
             k = norma2(k)
             
             if cont <= 101:
-                    
                 url = url_1+B[0]+'/'+k
                     
             elif cont > 101 and cont <= 145:
-                    
                 url = url_1+B[1]+'/'+k
                     
             elif cont > 145 and cont <= 220:
-                    
                 url = url_1+B[2]+'/'+k
                     
             elif cont > 220 and cont <= 388:
-                    
                 url = url_1+B[3]+'/'+k
                     
             elif cont > 388 and cont <= 467:
-                    
                 url = url_1+B[4]+'/'+k
                     
             elif cont > 467 and cont <= 564:
-                    
                 url = url_1+B[5]+'/'+k
                     
             elif cont > 564 and cont <= 664:
-                    
                 url = url_1+B[6]+'/'+k
                     
             elif cont > 664:
-                    
                 url = url_1+B[7]+'/'+k
                 
             pagina = requests.get(url)
@@ -362,7 +330,6 @@ def get_renta(cont, id_tabla, url_0):
     df = []
     
     for i in cont:
-        
         url = url_0+i
         
         pagina = requests.get(url)
@@ -452,16 +419,13 @@ def Particip(df):
     Part = []
     
     for i in range(len(df)):
-        
         df[i] = df[i].stack().str.replace('.','').unstack()
         
         if i == 13:
-            
             df[i][1][[2,3]] = df[i][1][[2,3]].astype(int)
             Part.append(round(df[i][1][2]/(df[i][1][2]+df[i][1][3])*100,2))
             
         else:
-            
             df[i][1][[3,4]] = df[i][1][[3,4]].astype(int)
             Part.append(round(df[i][1][3]/(df[i][1][3]+df[i][1][4])*100,2))
         
@@ -481,11 +445,9 @@ def Exclud(d,df):
     '''
     
     for i in range(len(df)):
-        
         for j in df[i]['Municipios'].unique().tolist():
             
             if norma(j) not in d:
-                
                 df[i] = df[i].drop(df[i][df[i]['Municipios'] == j].index)\
                     .reset_index(drop = True)
                     
@@ -532,7 +494,6 @@ def Limp_Paro(df, d, prov):
         for j in range(len(prov)):
             
             if df[i]['Provincia'][0] == prov[j] and len(df[i])-num_munip[j] > 0:
-                
                 df[i].drop(df[i].tail(len(df[i])-num_munip[j]).index, inplace = True)
                 
     return df
@@ -1216,12 +1177,10 @@ def Agrup(df):
     P = []
     
     for i in range(len(df['Clasificación'].unique())):
-        
         P.append(df[df['Clasificación'] == i+1][['Municipios','Periodo','Total']]\
                  .reset_index(drop = True))
         
     for i in range(len(P)):
-        
         P[i] = P[i].groupby('Periodo').sum()
         
     keys = ['<1000','<2000','<10000','<100000','>= 100000']
@@ -1229,15 +1188,12 @@ def Agrup(df):
     P = P['Total']
     
     for i in P.columns:
-        
         Pob = []
         
         for j in range(len(P[i])):
-            
             Pob.append(P[i][j]/P[i].sum()*100)
             
         for j in range(len(P[i])):
-            
             P[i][j] = Pob[j]
             
     return P
