@@ -56,7 +56,22 @@ df['id'] = df['Municipios'].apply(lambda x: mun_id[x])
     
 ##### Creación de los mapas municipales #####
 
-fig_gen = px.choropleth_mapbox(df[df['Tipo de Elección'] == 'General'],
+maps = {
+
+'Generales': px.choropleth_mapbox(df[df['Tipo de Elección'] == 'General'],
+                               locations = 'id',
+                               geojson = municipio,
+                               hover_name = 'Municipios',
+                               animation_frame = 'Año',
+                               color_continuous_scale = px.colors.diverging.balance,
+                               color_continuous_midpoint = 0,
+                               range_color = [-80, 80],
+                               mapbox_style = 'carto-positron',
+                               title = 'Evolución de las Elecciones Generales',
+                               center = {'lat': 37.471325, 'lon': -4.581459},
+                               zoom = 6.5, opacity = 0.5),
+
+'Autonómicas': px.choropleth_mapbox(df[df['Tipo de Elección'] == 'Autonómica'],
                                locations = 'id',
                                geojson = municipio,
                                hover_name = 'Municipios',
@@ -68,40 +83,28 @@ fig_gen = px.choropleth_mapbox(df[df['Tipo de Elección'] == 'General'],
                                title = 'Evolución de las Elecciones Generales',
                                center = {'lat': 37.471325, 'lon': -4.581459},
                                zoom = 6.5, opacity = 0.5)
-
-fig_aut = px.choropleth_mapbox(df[df['Tipo de Elección'] == 'Autonómica'],
-                               locations = 'id',
-                               geojson = municipio,
-                               hover_name = 'Municipios',
-                               animation_frame = 'Año',
-                               color_continuous_scale = px.colors.diverging.balance,
-                               color_continuous_midpoint = 0,
-                               range_color = [-80, 80],
-                               mapbox_style = 'carto-positron',
-                               title = 'Evolución de las Elecciones Generales',
-                               center = {'lat': 37.471325, 'lon': -4.581459},
-                               zoom = 6.5, opacity = 0.5)
-
+}
 #-----------------------------------------------------------------------------#
 
 ##### Aplicación #####
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__)
+Tipo = df['Tipo de Elección'].unique()
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.layout = html.Div([
+    html.P("Select an animation:"),
+    dcc.RadioItems(
+        id='selection',
+        options=[{'label': x, 'value': x} for x in maps],
+        value='Generales'
+    ),
+    dcc.Graph(id="graph"),
+])
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+@app.callback(
+    Output("graph", "figure"), 
+    [Input("selection", "value")])
+def display_animated_graph(s):
+    return maps[s]
 
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure = fig_gen
-        )
-    ])
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+app.run_server(debug=True)
