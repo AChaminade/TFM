@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jan  9 14:28:35 2021
-
-@author: Adrián González
-"""
 
 #Librerías#
 
