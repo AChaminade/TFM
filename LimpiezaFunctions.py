@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #Librerías#
 
 import pandas as pd

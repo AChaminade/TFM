@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 18 11:22:06 2021
-
-@author: Adrián González
-"""
-
 ##Librerías##
 
 import pandas as pd

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ##### Librerías #####
 
 import dash_bootstrap_components as dbc
