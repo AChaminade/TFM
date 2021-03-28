@@ -31,6 +31,10 @@ Para poder ejecutar el código de este repositorio será necesario tener instala
 * Shap
 * Joblib
 * Pickle
+* Dash
+* dash_core_components
+* dash_html_components
+* dash_bootstrap_components
 
 **De R** (usado sólo puntualmente para visualización, no necesario para reproducir el trabajo)
 
